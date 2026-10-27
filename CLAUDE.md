@@ -16,6 +16,8 @@ API do app **Controle de Clientes FTS**. O frontend (React + MUI) fica em `../co
 ./mvnw test -Dtest=ClienteApiTest            # uma classe (testes de API com MockMvc + login real)
 ./mvnw test -Dtest=ClienteApiTest#cicloCompletoDoCliente   # um método
 ./mvnw compile
+docker build -t controle-clientes-backend .  # imagem (multi-stage, não roda testes)
+docker compose up -d --build                 # Postgres + API; precisa de .env (ver .env.example)
 ```
 Banco local (uma vez): `psql postgres -c "create role controle_user login password 'controle_user'"` e `createdb -O controle_user controle_clientes`. Frontend: `npm run dev` em `../controle-clientes` (proxy de `/api` → `localhost:8080`), login `admin`/`admin`.
 

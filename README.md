@@ -17,6 +17,18 @@ API do app **Controle de Clientes FTS** (frontend em `../controle-clientes`). Sp
 
 Testes: `./mvnw test` (usam H2 em memória, não precisam do Postgres).
 
+## Docker
+
+```sh
+docker build -t controle-clientes-backend .   # só gerar a imagem
+cp .env.example .env                          # e trocar as senhas/segredo
+docker compose up -d --build                  # Postgres + API em http://localhost:8080
+docker compose logs -f api
+docker compose down                           # para (os dados ficam no volume "dados"; -v apaga)
+```
+
+O `compose.yaml` não publica a porta do Postgres, para não conflitar com um Postgres local na 5432. A imagem não roda os testes (`-DskipTests`); rode `./mvnw test` antes.
+
 ## Endpoints
 
 | Método | Caminho | Descrição |
