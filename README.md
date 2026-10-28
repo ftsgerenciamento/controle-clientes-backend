@@ -44,9 +44,13 @@ Demais chamadas exigem o header `Authorization: Bearer <token>`. Erros seguem o 
 
 ## Configuração (variáveis de ambiente)
 
-| Variável | Padrão (dev) | Uso |
-|---|---|---|
-| `DB_URL`, `DB_USUARIO`, `DB_SENHA` | banco local `controle_clientes` | conexão com o Postgres |
-| `JWT_SEGREDO` | valor de desenvolvimento | chave dos tokens (mín. 32 caracteres) — **trocar em produção** |
-| `ADMIN_USUARIO`, `ADMIN_SENHA` | `admin` / `admin` | usuário criado se o banco não tiver nenhum |
-| `CORS_ORIGENS` | `http://localhost:5173` | endereços do frontend autorizados |
+O `application.properties` não tem valores padrão: em produção, todas estas variáveis são obrigatórias (no Docker, vêm do `.env`).
+
+| Variável | Uso |
+|---|---|
+| `DB_URL`, `DB_USUARIO`, `DB_SENHA` | conexão com o Postgres |
+| `JWT_SEGREDO` | chave dos tokens (mín. 32 caracteres) |
+| `ADMIN_USUARIO`, `ADMIN_SENHA` | usuário criado se o banco não tiver nenhum |
+| `CORS_ORIGENS` | endereços do frontend autorizados (separados por vírgula) |
+
+Para desenvolvimento local, os valores ficam em `src/main/resources/application-dev.properties` (perfil `dev`). O `./mvnw spring-boot:run` já ativa esse perfil; no IntelliJ, informe `dev` em **Run Configuration → Active profiles**.

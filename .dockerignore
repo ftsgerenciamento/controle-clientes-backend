@@ -4,3 +4,6 @@ target/
 *.iml
 .DS_Store
 .env
+src/main/resources/application-dev.properties
+
+src/main/resources/application-test.properties

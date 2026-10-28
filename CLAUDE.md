@@ -11,7 +11,7 @@ API do app **Controle de Clientes FTS**. O frontend (React + MUI) fica em `../co
 
 ## Comandos
 ```sh
-./mvnw spring-boot:run                       # sobe a API em :8080 (precisa do Postgres local)
+./mvnw spring-boot:run                       # sobe a API em :8080 com o perfil dev (precisa do Postgres local)
 ./mvnw test                                  # todos os testes (H2 em memória, sem Postgres)
 ./mvnw test -Dtest=ClienteApiTest            # uma classe (testes de API com MockMvc + login real)
 ./mvnw test -Dtest=ClienteApiTest#cicloCompletoDoCliente   # um método
@@ -38,4 +38,4 @@ Organizado **por camada**, todos os pacotes sob `com.fts.gerenciamento.controle_
 - Os testes usam o perfil `test` (`src/test/resources/application-test.properties`, H2 em modo PostgreSQL), então as migrations precisam rodar tanto no Postgres quanto no H2.
 
 ## Configuração
-Todas as propriedades em `application.properties` têm padrão de desenvolvimento e podem ser sobrescritas por variáveis de ambiente: `DB_URL`, `DB_USUARIO`, `DB_SENHA`, `JWT_SEGREDO`, `ADMIN_USUARIO`, `ADMIN_SENHA`, `CORS_ORIGENS`. Os padrões (`admin`/`admin`, segredo de dev) não servem para produção.
+`application.properties` não tem valores padrão: lê tudo de variáveis de ambiente (`DB_URL`, `DB_USUARIO`, `DB_SENHA`, `JWT_SEGREDO`, `ADMIN_USUARIO`, `ADMIN_SENHA`, `CORS_ORIGENS`) e não sobe se faltar alguma. Os valores locais ficam em `application-dev.properties` (perfil `dev`, ativado automaticamente pelo `spring-boot:run` via `pom.xml`; no IntelliJ, colocar `dev` em *Active profiles*). Os testes usam `application-test.properties`. Em Docker/produção nenhum perfil é ativado e as variáveis vêm do `.env` do compose.
